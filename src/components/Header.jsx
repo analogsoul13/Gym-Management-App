@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 function Header() {
     return (
         <>
-            <div className="navbar bg-transparent">
+            <div className="navbar bg-transparent font-google">
                 <div className="flex-1">
                     <Link to={'/'}>
                         <h1 className="btn btn-ghost font-bold text-white text-3xl">Gym Management</h1>

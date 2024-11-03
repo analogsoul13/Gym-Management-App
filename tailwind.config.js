@@ -9,7 +9,10 @@ export default {
       backgroundImage: {
         bannerImg: "url('/gym-banner.jpg')",
         blackOverlay: "linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0,8) 100%)"
-      }
+      },
+      fontFamily: {
+        'google': ['Cabin'],
+      },
     },
   },
   plugins: [

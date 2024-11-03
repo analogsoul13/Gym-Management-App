@@ -31,9 +31,9 @@ function Authentication() {
     <>
       <div className='h-screen w-full bg-bannerImg flex flex-col items-center bg-no-repeat bg-cover '>
         <Header />
-        <div className='flex flex-col sm:flex-row h-screen justify-center items-center'>
+        <div className='flex flex-col sm:flex-row h-screen font-google justify-center items-center'>
 
-          <div className='grid grid-rows-1 rounded-xl gap-4 p-6 w-96'>
+          <div className='grid grid-rows-1 rounded-xl gap-4 glass p-6 w-96'>
             {
               authStatus ?
                 <h1 className='text-xl font-semibold mx-auto text-slate-100'>Register</h1>

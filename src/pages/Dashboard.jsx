@@ -6,13 +6,13 @@ import Edit from '../components/Edit'
 function Dashboard() {
   return (
     <>
-      <div className='bg-black h-screen flex space-y-2 flex-col'>
+      <div className='bg-black h-screen flex space-y-2 font-google flex-col'>
         <Header />
         <h1 className='text-slate-100 text-xl mx-auto'>All Members</h1>
         <Add/>
         {/* <button className='btn mx-auto'>Add</button> */}
         <div className="overflow-x-auto mx-14">
-          <table className="table text-white bg-secondary-content">
+          <table className="table text-white glass">
             {/* head */}
             <thead>
               <tr className='text-slate-100'>
