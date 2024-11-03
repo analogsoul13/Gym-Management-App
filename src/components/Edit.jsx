@@ -23,7 +23,7 @@ function Edit() {
           <div className='flex justify-center '>
             <label>
               <input type="file" className='hidden' />
-              <img className='w-32 h-32 shadow-lg rounded-full' src="https://cdn1.iconfinder.com/data/icons/rounded-black-basic-ui/139/Photo_Add-RoundedBlack-512.png" alt="Member img" srcset="" />
+              <img className='w-32 h-32 shadow-lg rounded-full' src="https://cdn1.iconfinder.com/data/icons/rounded-black-basic-ui/139/Photo_Add-RoundedBlack-512.png" alt="Member img" />
             </label>
 
           </div>

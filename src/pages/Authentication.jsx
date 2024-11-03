@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import Header from '../components/Header'
 import { toast } from 'react-toastify'
-import { registerApi } from '../services/allApis'
+import { registerApi, loginApi } from '../services/allApis'
+import { useNavigate } from 'react-router-dom'
 
 function Authentication() {
 
@@ -10,21 +11,67 @@ function Authentication() {
     username: "", email: "", password: ""
   })
 
+  const nav = useNavigate()
+
   const changeStatus = () => {
     setAuthStatus(!authStatus)
   }
 
-  const handleRegister = async() => {
+  const handleRegister = async () => {
     console.log(user)
     const { email, username, password } = user
     if (!email || !username || !password) {
       toast.warning("Enter Valid Inputs !!!")
     }
-    else{
+    else {
       const res = await registerApi(user)
       console.log(res)
+      if (res.status == 201) {
+        toast.success("Registration Successfull!!")
+        setUser({
+          username: "", email: "", password: ""     // re initializing user states
+        })
+        changeStatus()
+      }
+      else {
+        if (res?.response?.data) {
+          toast.error(res.response.data)
+        }
+        else{
+          toast.error("Something went wrong !!")
+        }
+
+      }
     }
 
+  }
+
+  const handleLogin=async()=>{
+    const {email,password} = user
+    if(!email || !password){
+      toast.warning("Enter Valid Inputs !!")
+    }
+    else{
+      const res = await loginApi(user)
+      //console.log(res)
+      if(res.status==200){
+        toast.success("Login Succesfull !!")
+        setUser({
+          email:"", username:"", password:""
+        })
+        sessionStorage.setItem('token',res.data.token)
+        sessionStorage.setItem('uname',res.data.username)
+        nav('/dashboard')
+      }
+      else{
+        if(res?.reponse?.data){
+          toast.error(res.response.data)
+        }
+        else{
+          toast.error("Something went wrong !!")
+        }
+      }
+    }
   }
 
   return (
@@ -52,7 +99,7 @@ function Authentication() {
                 <path
                   d="M15 6.954 8.978 9.86a2.25 2.25 0 0 1-1.956 0L1 6.954V11.5A1.5 1.5 0 0 0 2.5 13h11a1.5 1.5 0 0 0 1.5-1.5V6.954Z" />
               </svg>
-              <input onChange={(e) => setUser({ ...user, email: e.target.value })} type="text" className="grow" placeholder="Email" />
+              <input onChange={(e) => setUser({ ...user, email: e.target.value })} value={user.email} type="text" className="grow" placeholder="Email" />
             </label>
 
             {
@@ -66,7 +113,7 @@ function Authentication() {
                   <path
                     d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM12.735 14c.618 0 1.093-.561.872-1.139a6.002 6.002 0 0 0-11.215 0c-.22.578.254 1.139.872 1.139h9.47Z" />
                 </svg>
-                <input onChange={(e) => setUser({ ...user, username: e.target.value })} type="text" className="grow" placeholder="Username" />
+                <input onChange={(e) => setUser({ ...user, username: e.target.value })} value={user.username} type="text" className="grow" placeholder="Username" />
               </label>
             }
 
@@ -81,14 +128,14 @@ function Authentication() {
                   d="M14 6a4 4 0 0 1-4.899 3.899l-1.955 1.955a.5.5 0 0 1-.353.146H5v1.5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-2.293a.5.5 0 0 1 .146-.353l3.955-3.955A4 4 0 1 1 14 6Zm-4-2a.75.75 0 0 0 0 1.5.5.5 0 0 1 .5.5.75.75 0 0 0 1.5 0 2 2 0 0 0-2-2Z"
                   clipRule="evenodd" />
               </svg>
-              <input onChange={(e) => setUser({ ...user, password: e.target.value })} type="password" placeholder='Password' />
+              <input onChange={(e) => setUser({ ...user, password: e.target.value })} value={user.password} type="password" placeholder='Password' />
             </label>
             <div className='flex justify-between'>
               {
                 authStatus ?
                   <button onClick={handleRegister} className='btn text-slate-100 btn-outline'>Register</button>
                   :
-                  <button className='btn text-slate-100 btn-outline'>Login</button>
+                  <button onClick={handleLogin} className='btn text-slate-100 btn-outline'>Login</button>
 
               }
               {
