@@ -9,9 +9,12 @@ function Dashboard() {
       <div className='bg-black h-screen flex space-y-2 font-google flex-col'>
         <Header />
         <h1 className='text-slate-100 text-xl mx-auto'>All Members</h1>
-        <Add/>
+        <div className='flex justify-center md:justify-start w-full'>
+          <Add />
+        </div>
+
         {/* <button className='btn mx-auto'>Add</button> */}
-        <div className="overflow-x-auto mx-14">
+        <div className="overflow-x-auto mx-6 sm:mx-14">
           <table className="table text-white glass">
             {/* head */}
             <thead>
@@ -51,7 +54,7 @@ function Dashboard() {
                 </td>
                 <td>
                   <div className='flex gap-2'>
-                    <Edit/>
+                    <Edit />
                     <button className='btn btn-error'>Delete</button>
                   </div>
                 </td>

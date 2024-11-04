@@ -5,7 +5,7 @@ const commonApi = async(reqUrl,reqMethod,reqHeader,reqBody)=>{
     const config={
         url:reqUrl,
         method:reqMethod,
-        haeders:reqHeader?reqHeader:{'Content-Type':'application/json'},
+        headers:reqHeader?reqHeader:{'Content-Type':'application/json'},
         data:reqBody
     }
 

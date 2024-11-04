@@ -11,3 +11,8 @@ export const registerApi=async (data)=>{
 export const loginApi = async (data) =>{
     return await commonApi(`${base_url}/log`,"POST","",data)
 }
+
+
+export const addClientApi = async (data,header) =>{
+    return await commonApi(`${base_url}/addclient`,"POST",header,data)
+}
