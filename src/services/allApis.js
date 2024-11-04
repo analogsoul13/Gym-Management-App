@@ -19,3 +19,7 @@ export const addClientApi = async (data,header) =>{
 export const getClientsApi = async (header) =>{
     return await commonApi(`${base_url}/clients`,"GET",header,"")
 }
+
+export const deleteClientApi = async (id,header) =>{
+    return await commonApi(`${base_url}/delclient/${id}`,"DELETE",header,{}) //pass empty object
+}

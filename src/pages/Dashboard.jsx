@@ -2,8 +2,9 @@ import React, { useEffect, useState, useContext } from 'react'
 import Header from '../components/Header'
 import Add from '../components/Add'
 import Edit from '../components/Edit'
-import { getClientsApi } from '../services/allApis'
+import { getClientsApi, deleteClientApi } from '../services/allApis'
 import { responseContext } from '../Contextapi/ContextProvider'
+import { toast } from 'react-toastify'
 
 function Dashboard() {
 
@@ -23,6 +24,22 @@ function Dashboard() {
     console.log(res)
     if (res.status == 200) {
       setClients(res.data)
+    }
+  }
+
+  const handleDelete = async(id)=>{
+    const header={
+      'Content-Type':'application/json',
+      'Authorization':`Token ${sessionStorage.getItem('token')}`
+    }
+
+    const res = await deleteClientApi(id,header)
+    console.log(res)
+    if(res.status==200){
+      getData()
+    }
+    else{
+      toast.warning("Deletion Failed !!")
     }
   }
 
@@ -83,7 +100,7 @@ function Dashboard() {
                         <th>
                           <div className='flex gap-2'>
                             <Edit />
-                            <button className='btn btn-error'>Delete</button>
+                            <button onClick={()=>handleDelete(item._id)} className='btn btn-error'>Delete</button>
                           </div>
 
                         </th>
