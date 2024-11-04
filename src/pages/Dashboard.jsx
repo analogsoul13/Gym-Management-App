@@ -1,16 +1,18 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import Header from '../components/Header'
 import Add from '../components/Add'
 import Edit from '../components/Edit'
 import { getClientsApi } from '../services/allApis'
+import { responseContext } from '../Contextapi/ContextProvider'
 
 function Dashboard() {
 
   const [clients, setClients] = useState([])
+  const {response} = useContext(responseContext)
 
   useEffect(() => {
     getData()
-  }, [])
+  }, [response])
 
   const getData = async () => {
     const header = {

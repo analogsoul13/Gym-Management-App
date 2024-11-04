@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { toast } from 'react-toastify';
 import { addClientApi } from '../services/allApis';
+import { responseContext } from '../Contextapi/ContextProvider';
 
 function Add() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -10,6 +11,8 @@ function Add() {
     first_name: '', last_name: '', email: '', phone: '', image: null
   });
   const [preview, setPreview] = useState('');
+
+  const {setResponse} = useContext(responseContext)
 
   useEffect(() => {
     if (client.image) {
@@ -58,6 +61,7 @@ function Add() {
       if (res.status === 201) {
         toast.success('Client Details Added Successfully!');
         closeModal();
+        setResponse(res)
       } else {
         toast.error('Adding Failed!');
       }
