@@ -5,11 +5,15 @@ import Edit from '../components/Edit'
 import { getClientsApi, deleteClientApi } from '../services/allApis'
 import { responseContext } from '../Contextapi/ContextProvider'
 import { toast } from 'react-toastify'
+import base_url from '../services/base_url'
+import { useNavigate } from 'react-router-dom'
 
 function Dashboard() {
 
   const [clients, setClients] = useState([])
   const {response} = useContext(responseContext)
+
+  const nav = useNavigate()
 
   useEffect(() => {
     getData()
@@ -43,13 +47,20 @@ function Dashboard() {
     }
   }
 
+  const logout = ()=>{
+    sessionStorage.clear()
+    nav('/')
+
+  }
+
   return (
     <>
       <div className='bg-black h-screen flex space-y-2 font-google flex-col'>
         <Header />
         <h1 className='text-slate-100 text-xl mx-auto'>All Members</h1>
-        <div className='flex justify-center md:justify-start w-full'>
+        <div className='flex justify-between w-full'>
           <Add />
+          <button onClick={logout} className='btn me-6 md:me-14 btn-error btn-outline'>Logout</button>
         </div>
 
         {/* <button className='btn mx-auto'>Add</button> */}
@@ -79,7 +90,7 @@ function Dashboard() {
                             <div className="avatar">
                               <div className="mask mask-squircle h-12 w-12">
                                 <img
-                                  src="https://img.daisyui.com/images/profile/demo/2@94.webp"
+                                  src={`${base_url}/uploads/${item.image}`}
                                   alt="profile" />
                               </div>
                             </div>
@@ -99,7 +110,7 @@ function Dashboard() {
                         </td>
                         <th>
                           <div className='flex gap-2'>
-                            <Edit />
+                            <Edit client={item} />
                             <button onClick={()=>handleDelete(item._id)} className='btn btn-error'>Delete</button>
                           </div>
 

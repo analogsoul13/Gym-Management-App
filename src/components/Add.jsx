@@ -70,7 +70,7 @@ function Add() {
 
   return (
     <>
-      <button onClick={openModal} className='btn mx-14 shadow-lg'>Add Member +</button>
+      <button onClick={openModal} className='btn ms-6 md:ms-14 shadow-lg'>Add Member +</button>
       {isModalOpen && (
         <dialog
           id="my_modal_1"
